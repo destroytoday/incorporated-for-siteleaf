@@ -55,9 +55,7 @@
 
       <nav>
         {% for page in site.pages %}
-        {% unless forloop.first %}
-        <a href="{{ page.url }}">{{ page.title }}</a>{% unless forloop.last %} &middot;{% endunless %}
-        {% endunless %}
+        <a href="{{ page.meta.external_url | fallback: page.url }}">{{ page.title }}</a>{% unless forloop.last %} &middot;{% endunless %}
         {% endfor %}
       </nav>
 
