@@ -37,7 +37,9 @@
           <img src="{{ site.meta.logo }}" alt="{{ site.title }}">
         </a>
         {% for page in site.pages %}
+        {% unless page.meta.hide_from_nav %}
         <a href="{{ page.meta.external_url | fallback: page.url }}">{{ page.title }}</a>
+        {% endunless %}
         {% endfor %}
       </nav>
       {% if site.meta.tagline or site.meta.product_url %}<nav class="tagline">
@@ -55,7 +57,9 @@
 
       <nav>
         {% for page in site.pages %}
+        {% unless page.meta.hide_from_nav %}
         <a href="{{ page.meta.external_url | fallback: page.url }}">{{ page.title }}</a>{% unless forloop.last %} &middot;{% endunless %}
+        {% endunless %}
         {% endfor %}
       </nav>
 

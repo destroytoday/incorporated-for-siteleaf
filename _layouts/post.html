@@ -1,15 +1,11 @@
 {% capture content %}
-  {% assign author_slug = author.name | replace: ' ', '_' | downcase %}
-  {% assign author_link = author_slug | append: '_link' %}
-  {% assign author_image = author_slug | append: '_image' %}
-  {% assign author_bio = author_slug | append: '_bio' %}
-  {% assign author_twitter = author_slug | append: '_twitter' %}
+  {% assign contributor_slug = meta.contributor | replace: ' ', '-' | downcase %}
+  {% assign contributor = site.pages.contributors.pages[contributor_slug] %}
 
   {% if meta.cover_image %}
   <div class="article-cover">
     <div>
       <img src="{{ meta.cover_image }}" class="image">
-      {{ author_slug }}
     </div>
   </div>
   {% endif %}
@@ -17,7 +13,7 @@
     <div class="container">
       <header>
         <div class="meta">
-          By <address><a rel="author" href="{{ site.meta[author_link] }}" title="{{ author.name }}" target="_blank">{{ author.name }}</a> &mdash;
+          By <address><a rel="author" href="{{ contributor.meta.link }}" title="{{ contributor.title }}" target="_blank">{{ contributor.title }}</a> &mdash;
           <time pubdate datetime="{{ date | date: "%Y-%d-%B" }}" title="{{ date | date: "%B %d, %Y" }}">{{ date | date: "%B %d, %Y" }}</time>
         </div>
         <h1 class="title">{{ title }}</h1>
@@ -31,9 +27,9 @@
 
       <footer>
         <address>
-          {% if site.meta[author_image] %}<img src="{{ site.meta[author_image] }}">{% endif %}
-          <p>Written by <strong><a rel="author" href="https://twitter.com/{{ site.meta[author_twitter] }}" title="{{ author.name }}" target="_blank">{{ author.name }}</a></strong><br>
-          <span class="muted">{{ site.meta[author_bio] }}</span>
+          {% if contributor.meta.avatar %}<img src="{{ contributor.meta.avatar }}">{% endif %}
+          <p>Written by <strong><a rel="author" href="https://twitter.com/{{ contributor.meta.twitter }}" title="{{ contributor.meta.title }}" target="_blank">{{ contributor.title }}</a></strong><br>
+          <span class="muted">{{ contributor.body_raw }}</span>
           </p>
         </address>
       </footer>
