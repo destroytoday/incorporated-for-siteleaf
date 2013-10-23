@@ -1,0 +1,24 @@
+{% if site.meta.twitter or site.meta.facebook or site.meta.gplus or site.meta.hackernews %}
+<div class="social">
+  {% if site.meta.twitter %}<div>
+    <a href="https://twitter.com/share" class="twitter-share-button" {% if site.meta.twitter %}data-via="{{ site.meta.twitter }}"{% endif %} data-text="{{ title }}" data-related="{{ site.meta.twitter }}">Tweet</a>
+  </div>
+  {% endif %}
+  {% if site.meta.facebook %}
+  <div>
+    <div class="fb-like" data-width="150" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+  </div>
+  {% endif %}
+  {% if site.meta.gplus %}
+  <div>
+    <div class="g-plusone" data-size="medium"></div>
+  </div>
+  {% endif %}
+
+  {% if site.meta.hn %}
+  <div>
+    <a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a>
+  </div>
+  {% endif %}
+</div>
+{% endif %}

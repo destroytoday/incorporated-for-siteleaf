@@ -1,2 +1,8 @@
-_site/
 .DS_Store
+.sass-cache
+config.ru
+.rbenv-gemsets
+.ruby-version
+Gemfile
+Gemfile.lock
+Guardfile

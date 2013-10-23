@@ -1,0 +1,52 @@
+{% capture content %}
+  <div class="blog-cover" style="background-image:url({{ meta.cover_image }});">
+    <section>
+      <div class="container">
+        <h1>{{ title }}</h1>
+        {% if meta.subtitle %}<h3>{{ meta.subtitle }}</h3>{% endif %}
+
+        {% if site.meta.twitter %}
+        <a href="https://twitter.com/{{ site.meta.twitter }}" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+        {% endif %}
+        {% if site.meta.facebook %}
+        <a href="http://facebook.com/{{ site.meta.facebook }}" title="Like on Facebook" target="_blank"><i class="icon icon-facebook"></i></a>
+        {% endif %}
+        <a href="{{ site.feed_url }}" title="RSS Feed">
+          <i class="icon icon-rss"></i>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <article class="container">
+  {% for post in posts %}
+    <section class="index">
+      {% assign author_image = post.author.name | replace: ' ', '_' | downcase | append: '_image' %}
+      <img src="{{ site.meta[author_image] }}" class="avatar">
+      <div>
+        <h2 class="title"><a href="{{ post.url }}" rel="prefetch">{{ post.title }}</a></h2>
+        <p>{{ post.excerpt }}</p>
+        <div class="meta">
+          Written By <address>{{ post.author.name }}</a> &mdash;
+          <time pubdate datetime="{{ post.date | date: "%Y-%d-%B" }}" title="{{ post.date | date: "%B %d, %Y" }}">{{ post.date | date: "%B %d, %Y" }}</time>
+        </div>
+      </div>
+      <hr>
+    </section>
+    {% endfor %}
+    <!-- <section class="pagination" style="text-align:center">
+      {% if paginator.previous_page %}
+        {% if paginator.previous_page == 1 %}
+        <a href="/" class="btn btn-outline">‹ Newer</a>
+        {% else %}
+        <a href="/page{{ paginator.previous_page }}" class="btn btn-outline">‹ Newer</a>
+        {% endif %}
+      {% endif %}
+      {% if paginator.next_page %}
+        <a href="/page{{ paginator.next_page }}" class="btn btn-outline">Older ›</a>
+      {% endif %}
+    </section> -->
+  </article>
+{% endcapture %}
+
+{% include 'layouts/default' %}

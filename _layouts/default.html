@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} &mdash; {{ site.title }}{% else %}{{ site.title }} &mdash; {{ site.meta.subtitle }}{% endif %}</title>
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
+    <link href="/assets/stylesheets/main.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/logo.png"/>
+    <link href="{{ site.feed_url }}" rel="alternate" type="application/rss+xml" title="{{ site.title }}" />
+    <meta name="title" content="{% if title %}{{ title }} {% else %}{{ site.title }}{% endif %}">
+    <link rel="canonical" href="{{ permalink }}">
+    {% if page.site.gplus %}<link rel="publisher" href="https://plus.google.com/{{ site.inc.gplus }}">{% endif %}
+    {% if page.author.gplus %}<link rel="author" href="https://plus.google.com/{{ page.author.gplus }}">{% endif %}
+    <meta property="og:title" content="{% if title %}{{ title }} {% else %}{{ site.title }}{% endif %}"/>
+    <meta property="og:url" content="{{ permalink }}"/>
+    {% if meta.cover_image %}
+    <meta property="og:image" content="{{ site.url }}{{ meta.cover_image }}"/>
+    {% if page.main_image %}
+    <meta property="og:image" content="{{ site.url }}{{ meta.main_image }}"/>
+    {% endif %}
+    <meta property="og:image" content="{{ site.url }}/images/logo.png"/>
+    {% endif %}
+    {% if excerpt %}
+    <meta property="og:description" content="{{ excerpt }}"/>
+    <meta name="description" content="{{ excerpt }}"/>
+    {% endif %}
+    <meta property="og:site_name" content="{{ site.title }}">
+  </head>
+  <body>
+
+  <section class="site-nav">
+    <header>
+      <nav id="navigation">
+        <a class="brand" href="/">
+          <img src="{{ site.meta.logo }}" alt="{{ site.title }}">
+        </a>
+        {% for page in site.pages %}
+        <a href="{{ page.meta.external_url | fallback: page.url }}">{{ page.title }}</a>
+        {% endfor %}
+      </nav>
+      {% if site.meta.tagline or site.meta.product_url %}<nav class="tagline">
+        {% if site.meta.tagline %}<span>{{ site.meta.tagline }}</span>{% endif %}
+        {% if site.meta.product_link %}<a href="{{ site.meta.product_link }}" class="btn btn-outline">Learn More</a>{% endif %}
+      </nav>{% endif %}
+    </header>
+  </section>
+
+  {{ content }}
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; {{ site.date | date: "%Y" }}
+
+      <nav>
+        {% for page in site.pages %}
+        {% unless forloop.first %}
+        <a href="{{ page.url }}">{{ page.title }}</a>{% unless forloop.last %} &middot;{% endunless %}
+        {% endunless %}
+        {% endfor %}
+      </nav>
+
+      <nav class="social">
+        {% if site.meta.twitter %}
+        <a href="https://twitter.com/{{ site.meta.twitter }}" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
+        {% endif %}
+        {% if site.meta.facebook %}
+        <a href="http://facebook.com/{{ site.meta.facebook }}" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
+        {% endif %}
+        <a href="{{ site.feed_url }}" title="RSS Feed">
+          <i class="icon icon-rss black"></i>
+        </a>
+      </nav>
+      <p>Incorporated theme by <a href="https://sendtoinc.com">Inc</a></p>
+    </div>
+  </footer>
+
+  {% include 'includes/scripts' %}
+  </body>
+</html>

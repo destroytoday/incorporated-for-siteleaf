@@ -1,0 +1,8 @@
+.*
+Gemfile*
+Guardfile
+LICENSE
+README.md
+assets/stylesheets/*.sass
+assets/stylesheets/*.scss
+assets/javascripts/*.coffee

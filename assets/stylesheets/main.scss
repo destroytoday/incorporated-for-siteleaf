@@ -9,10 +9,11 @@ $fontheadings: "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 /* Text colors */
 $text: #21272d;
 $textmuted: #848484;
-$accent: #2077b2;
+$accent: #0A9268;
 
 
 /* IMPORT CSS FILES */
+@import "mixins";
 @import "bootstrap";
 @import "base";
 @import "nav";

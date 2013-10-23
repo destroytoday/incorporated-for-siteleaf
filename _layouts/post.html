@@ -1,44 +1,50 @@
----
-layout: base
----
-{% if page.cover_image %}
-<div class="article-cover">
+{% capture content %}
+  {% assign author_slug = author.name | replace: ' ', '_' | downcase %}
+  {% assign author_link = author_slug | append: '_link' %}
+  {% assign author_image = author_slug | append: '_image' %}
+  {% assign author_bio = author_slug | append: '_bio' %}
+  {% assign author_twitter = author_slug | append: '_twitter' %}
+
+  {% if meta.cover_image %}
+  <div class="article-cover">
     <div>
-        <img src="/images/{{ page.cover_image }}" class="image">
+      <img src="{{ meta.cover_image }}" class="image">
+      {{ author_slug }}
     </div>
-</div>
-{% endif %}
-<article>
-
+  </div>
+  {% endif %}
+  <article>
     <div class="container">
-        <header>
-            <div class="meta">
-                By <address><a rel="author" href="{{ page.author.link }}" title="{{ page.author.name }}" target="_blank">{{ page.author.name }}</a> &mdash;
-                <time pubdate datetime="{{ page.date | date: "%Y-%d-%B" }}" title="{{ page.date | date: "%B %d, %Y" }}">{{ page.date | date: "%B %d, %Y" }}</time>
-            </div>
-            <h1 class="title">{{ page.title }}</h1>
-            {% if page.subtitle %}<h2 class="subtitle">{{ page.subtitle }}</h2>{% endif %}
-        </header>
+      <header>
+        <div class="meta">
+          By <address><a rel="author" href="{{ site.meta[author_link] }}" title="{{ author.name }}" target="_blank">{{ author.name }}</a> &mdash;
+          <time pubdate datetime="{{ date | date: "%Y-%d-%B" }}" title="{{ date | date: "%B %d, %Y" }}">{{ date | date: "%B %d, %Y" }}</time>
+        </div>
+        <h1 class="title">{{ title }}</h1>
+        {% if meta.subtitle %}<h2 class="subtitle">{{ meta.subtitle }}</h2>{% endif %}
+      </header>
 
-        <section>
-            {{ content }}
-            {% include _social.html %}
-        </section>
+      <section>
+        {{ body }}
+        {% include 'includes/social' %}
+      </section>
 
-        <footer>
-            <address>
-               {% if page.author.image %}<img src="/images/{{ page.author.image }}">{% endif %}
-                <p>Written by <strong><a rel="author" href="https://twitter.com/{{ page.author.twitter }}" title="{{ page.author_name }}" target="_blank">{{ page.author.name }}</a></strong><br>
-                <span class="muted">{{ page.author.bio }}</span>
-                </p>
-            </address>
+      <footer>
+        <address>
+          {% if site.meta[author_image] %}<img src="{{ site.meta[author_image] }}">{% endif %}
+          <p>Written by <strong><a rel="author" href="https://twitter.com/{{ site.meta[author_twitter] }}" title="{{ author.name }}" target="_blank">{{ author.name }}</a></strong><br>
+          <span class="muted">{{ site.meta[author_bio] }}</span>
+          </p>
+        </address>
+      </footer>
 
-        </footer>
-
-        {% if site.inc.disqus.shortname %}
-        <section>
-            {% include _disqus.html %}
-        </section>
-        {% endif %}
+      {% if site.meta.disqus %}
+      <section>
+        {% include 'includes/disqus' %}
+      </section>
+      {% endif %}
     </div>
-</article>
+  </article>
+{% endcapture %}
+
+{% include 'layouts/default' %}
