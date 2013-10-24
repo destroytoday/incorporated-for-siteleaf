@@ -3,17 +3,17 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if title %}{{ title }} &mdash; {{ site.title }}{% else %}{{ site.title }} &mdash; {{ site.meta.subtitle }}{% endif %}</title>
+    <title>{% if title %}{{ meta.long_title | fallback: title }} &mdash; {{ site.title }}{% else %}{{ site.title }} &mdash; {{ site.meta.subtitle }}{% endif %}</title>
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
     <link href="/assets/stylesheets/main.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/images/logo.png"/>
     <link href="{{ site.feed_url }}" rel="alternate" type="application/rss+xml" title="{{ site.title }}" />
-    <meta name="title" content="{% if title %}{{ title }} {% else %}{{ site.title }}{% endif %}">
+    <meta name="title" content="{% if title %}{{ meta.long_title | fallback: title }} {% else %}{{ site.title }}{% endif %}">
     <link rel="canonical" href="{{ permalink }}">
     {% if page.site.gplus %}<link rel="publisher" href="https://plus.google.com/{{ site.inc.gplus }}">{% endif %}
     {% if page.author.gplus %}<link rel="author" href="https://plus.google.com/{{ page.author.gplus }}">{% endif %}
-    <meta property="og:title" content="{% if title %}{{ title }} {% else %}{{ site.title }}{% endif %}"/>
+    <meta property="og:title" content="{% if title %}{{ meta.long_title | fallback: title }} {% else %}{{ site.title }}{% endif %}"/>
     <meta property="og:url" content="{{ permalink }}"/>
     {% if meta.cover_image %}
     <meta property="og:image" content="{{ site.url }}{{ meta.cover_image }}"/>

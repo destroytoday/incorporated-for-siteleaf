@@ -2,7 +2,7 @@
   <div class="blog-cover" style="background-image:url({{ meta.cover_image }});">
     <section>
       <div class="container">
-        <h1>{{ title }}</h1>
+        <h1>{{ meta.long_title | fallback: title }}</h1>
         {% if meta.subtitle %}<h3>{{ meta.subtitle }}</h3>{% endif %}
 
         {% if site.meta.twitter %}
